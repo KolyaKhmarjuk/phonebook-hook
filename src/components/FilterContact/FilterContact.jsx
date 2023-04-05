@@ -1,4 +1,4 @@
-const FilterContact = ({ filter, handelChange }) => {
+const FilterContact = ({ filter, handelFilter }) => {
   return (
     <>
       <label className="filterLabel">
@@ -7,7 +7,7 @@ const FilterContact = ({ filter, handelChange }) => {
           type="text"
           name="filter"
           value={filter}
-          onChange={handelChange}
+          onChange={handelFilter}
           className="inputFilter"
         />
       </label>

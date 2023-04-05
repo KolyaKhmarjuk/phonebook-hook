@@ -1,5 +1,51 @@
-const AddForm = ({ ...props }) => {
-  const { name, number, handelChange, handelSubmit } = props;
+import { useState } from 'react';
+import { nanoid } from 'nanoid';
+
+const AddForm = ({ contacts, addContact }) => {
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
+
+  const handelChange = e => {
+    const { name } = e.target;
+
+    switch (name) {
+      case 'name':
+        setName(e.target.value);
+        break;
+      case 'number':
+        setNumber(e.target.value);
+        break;
+
+      default:
+        return;
+    }
+  };
+
+  const handelSubmit = e => {
+    e.preventDefault();
+
+    const newContact = {
+      id: nanoid(),
+      name: name,
+      number: number,
+    };
+
+    const nameCheck = contacts.some(contact => contact.name.includes(name));
+
+    if (nameCheck) {
+      alert(`${number} is readly in contacts!`);
+      return;
+    }
+
+    addContact(newContact);
+    reset();
+  };
+
+  const reset = () => {
+    setName('');
+    setNumber('');
+  };
+
   return (
     <>
       <form onSubmit={handelSubmit}>
